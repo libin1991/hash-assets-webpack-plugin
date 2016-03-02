@@ -16,6 +16,7 @@ The output is a JSON object in the form:
 ```json
 {
     "js/main.js": "bc675f6",
+    "css/main.css": "bc675f6",
     "js/commons.js": "5d32ba5"
 }
 ```
@@ -49,7 +50,7 @@ module.exports = {
             hashLength: 7,
             srcPath: './src',
             srcMatch: {
-                'home.tpl': /['"]([^'"]+\.(?:css|png|jpg))['"]/gi
+                'home.tpl': /['"]([^'"]+\.(?:png|jpg))['"]/gi
             },
             assetMatch: {
                 css: /\(['"]?([^\(\)]+\.(?:gif|png|jpg))['"]?\)/gi
@@ -83,8 +84,20 @@ __prettyPrint__: Whether to format the json output for readability. Defaults to 
 new AssetsPlugin({prettyPrint: true})
 ```
 
-__chunkNameTemplate__: chunks name value in hash json file.
+__keyTemplate__: [String|Function] asset key name in hash json file.
 
+```js
+new AssetsPlugin({
+    // default value
+    keyTemplate: 'js/[name].js',
+    // or a function, give filename of generated chunk as param, like 'js/main.9959c21.js',
+    // the form is specified by chunkFilename config of webpack
+    keyTemplate: function (filename) {
+        var match = /(js|css)\/([\w\-]+)\.\w{7}\.\1/.exec(filename);
+        return match[1] + '/' + match[2] + '.' + match[1];
+    },
+})
+```
 
 __hashLength__: Length of hash.
 
@@ -104,6 +117,8 @@ __assetNameTemplate__
 ### Using this with Php
 
 ## Changelog
+
+__0.2.0__ Support multiple file hash extract in one chunk
 
 __0.1.0__ First version
 

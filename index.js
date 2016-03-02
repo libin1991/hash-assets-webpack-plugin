@@ -1,13 +1,14 @@
 var fs = require('fs');
 var path = require('path');
 var merge = require('lodash.merge');
-var  utils = require('./lib/utils');
+var utils = require('./lib/utils');
 var extractAssets = require('./lib/extractAssets');
 
 function HashAssetsPlugin (options) {
   this.options = merge({}, {
     path: '.',
     filename: 'assets-hash.json',
+    keyTemplate: 'js/[name].js',
     hashLength: 20,
     prettyPrint: false,
     srcPath: '.',
@@ -44,8 +45,16 @@ HashAssetsPlugin.prototype = {
 
       var hashMap = {};
       chunks.forEach(function (chunk) {
-        if(chunk.names.length){
-          hashMap[options.chunkNameTemplate.replace('[name]', chunk.names[0])] =  chunk.hash.substr(0, options.hashLength);
+        if(chunk.initial && chunk.names.length){
+          chunk.files.forEach(function (file) {
+            var key;
+            if(typeof options.keyTemplate === 'string'){
+              key = options.keyTemplate.replace('[name]', chunk.names[0]);
+            } else if(typeof options.keyTemplate === 'function') {
+              key = options.keyTemplate(file);
+            }
+            hashMap[key] = chunk.hash.substr(0, options.hashLength);
+          });
         }
       });
 
