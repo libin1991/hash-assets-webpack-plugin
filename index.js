@@ -14,9 +14,23 @@ function HashAssetsPlugin (options) {
     srcPath: '.',
     srcMatch: {},
     exclude: ['://'],
-    assetsMatch: {
+    assetMatch: {
       css: /\(['"]?([^\(\)]+\.(?:gif|png|jpg|css))['"]?\)/gi
     },
+    // dynamic require match string convention in src html files:
+    // 1st part: directory start with './', relative to staic dir,
+    // 2nd part: regexp warp with '/', may contain folder directory,
+    // 2 parts separate with comma.
+    // e.g. './images', '/abc-\d+\.png$/',
+    // matched of './images/abc-1.png', './images/abc-2.png', ...
+    src_dynamic_pattern: /['"](\.\/[^'"]+)['"]\s*,\s*['"]\/(.+?)\/['"]/gi,
+    // dynamic require match string convention in js files:
+    // 1st part: directory start with './', relative to staic dir,
+    // 2nd part: regexp of path, end with $, may contain folder directory,
+    // 2 parts separate with comma.
+    // e.g. './images', '/[\w-]+\/abc-\d+\.png$/',
+    // matched of './images/abc-1.png', './images/xx/abc-2.png', ...
+    res_dynamic_pattern: /['"](\.\/[^'"]+)['"]\s*,\s*\/([^\$]+\$)\//gi,
     assetNameTemplate: '[name].[hash]'
   }, options);
 }
