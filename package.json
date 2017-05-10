@@ -1,6 +1,6 @@
 {
   "name": "hash-assets-webpack-plugin",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Get chunks hash from webpack stats and extracted assets from dynamic templates, emits a json file with all assets hash.",
   "main": "index.js",
   "scripts": {
