@@ -1,6 +1,6 @@
 {
   "name": "hash-assets-webpack-plugin",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Get chunks hash from webpack stats and extracted assets from dynamic templates, emits a json file with all assets hash.",
   "main": "index.js",
   "scripts": {
@@ -28,12 +28,12 @@
   },
   "homepage": "https://github.com/xsbear/hash-assets-webpack-plugin",
   "devDependencies": {
-    "eslint": "^1.6.0"
+    "eslint": "^3.19.0"
   },
   "dependencies": {
-    "lodash.merge": "^3.3.2",
-    "glob": "^7.0.0",
-    "colors": "^1.1.2"
+    "colors": "^1.1.2",
+    "glob": "^7.1.1",
+    "lodash.merge": "^4.6.0"
   },
   "maintainers": [
     {
