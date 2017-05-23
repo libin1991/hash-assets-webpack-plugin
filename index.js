@@ -69,7 +69,11 @@ HashAssetsPlugin.prototype = {
               } else if(typeof options.keyTemplate === 'function') {
                 key = options.keyTemplate(file);
               }
-              hashMap[key] = chunk.hash.substr(0, options.hashLength);
+              if(Array.isArray(key) && key.length === 2){
+                hashMap[key[0]] = key[1];
+              } else {
+                hashMap[key] = chunk.hash.substr(0, options.hashLength);
+              }
             });
           }
         });
