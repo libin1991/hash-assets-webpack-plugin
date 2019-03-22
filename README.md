@@ -72,7 +72,7 @@ __filename__: Name for the created json file. Defaults to `assets-hash.json`
 new AssetsPlugin({filename: 'assets.json'})
 ```
 
-__path__: Path where to output extracted assets. Defaults to the current directory.
+__path__: Path where to output extracted assets. Defaults to the webpack `output.path`.
 
 ```js
 new AssetsPlugin({path: './static'})
