@@ -114,10 +114,13 @@ __assetMatch__
 __assetNameTemplate__
 
 
-### Using this with Php
+## Change Log
 
-## Changelog
+### 1.0.0 BREAKING CHANGES
 
+* Update to v1.0.0, refactor with new plugin API.
+
+## Legacy
 __0.2.0__ Support multiple file hash extract in one chunk
 
 __0.1.0__ First version
